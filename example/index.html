@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>break.js example</title>
+    <style>
+
+      /*
+       * Page styles
+       */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'HelveticaNeue', 'Helvetica', Arial, sans-serif;
+        color: #333;
+        background: #eee;
+        font-size: 15px;
+      }
+      a {
+        color: #4aa;
+      }
+      .container {
+        width: 500px;
+        margin: 100px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.1);
+      }
+
+      pre {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        margin: 20px 0px;
+        font-family: 'Menlo', 'Monaco', monospace;
+        color: #555;
+      }
+
+      p {
+        margin: 20px 0px
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>break.js</h1>
+      <p>The following breakpoints are set:</p>
+      <pre><code>addBreakpoint('small', '(max-width: 600px)')
+addBreakpoint('medium', '(max-width: 900px)')
+addBreakpoint('large', '(max-width: 1200px)')</code></pre>
+      <p>Which causes events to be fired on the window object:
+      <pre><code>$(window).on('exit.small', function () {
+  alert('Exiting small breakpoint')
+})
+
+$(window).on('enter.small', function () {
+  alert('Entering small breakpoint')
+})
+
+// Etc...</pre></code>
+
+    <p>Look in the console to see the results.</p>
+    </div>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script src='../modernizr.js'></script>
+    <script src='../break.js'></script>
+    <script>
+      $(window).on('exit.small', function () {
+        alert('Exiting small breakpoint')
+      })
+      $(window).on('enter.small', function () {
+        alert('Entering small breakpoint')
+      })
+      addBreakpoint('small', '(min-width: 600px)')
+
+      $(window).on('exit.medium', function () {
+        alert('Exiting medium breakpoint')
+      })
+      $(window).on('enter.medium', function () {
+        alert('Entering medium breakpoint')
+      })
+      addBreakpoint('medium', '(min-width: 900px)')
+
+      $(window).on('exit.large', function () {
+        alert('Exiting large breakpoint')
+      })
+      $(window).on('enter.large', function () {
+        alert('Entering large breakpoint')
+      })
+      addBreakpoint('large', '(min-width: 1200px)')
+    </script>
+  </body>
+</html>
