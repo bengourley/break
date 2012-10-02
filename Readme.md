@@ -8,7 +8,7 @@ A demo can be found at: http://bengourley.github.com/break/example/
 
 ## Dependencies:
 
-This module depends on jQuery (Events) and Modernizr (Media query test and matchMedia polyfill)
+This module depends on jQuery (Events) and Modernizr **>=v2.6** (Media query test and matchMedia polyfill).
 
 It is up to you to ensure these dependencies exist. In the example, jQuery is
 hotlinked from Google's CDN and a custom build of Modernizr only containing `mq()`
