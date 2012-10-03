@@ -18,10 +18,10 @@ is used. You should do something better in production.
 
 ```js
 $(window)
-  .on('tiny.enter', function () {
+  .on('enter.tiny', function () {
     // Do something for tiny screens here
   })
-  .on('tiny.exit', function () {
+  .on('exit.tiny', function () {
     // Undo the setup for tiny screens here
   })
 
