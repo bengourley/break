@@ -49,16 +49,16 @@
     <div class='container'>
       <h1>break.js</h1>
       <p>The following breakpoints are set:</p>
-      <pre><code>addBreakpoint('small', '(max-width: 600px)')
-addBreakpoint('medium', '(max-width: 900px)')
-addBreakpoint('large', '(max-width: 1200px)')</code></pre>
+      <pre><code>addBreakpoint('small', '(min-width: 600px)')
+addBreakpoint('medium', '(min-width: 900px)')
+addBreakpoint('large', '(min-width: 1200px)')</code></pre>
       <p>Which causes events to be fired on the window object:
       <pre><code>$(window).on('exit.small', function () {
-  alert('Exiting small breakpoint')
+  console('Exiting small breakpoint')
 })
 
 $(window).on('enter.small', function () {
-  alert('Entering small breakpoint')
+  console('Entering small breakpoint')
 })
 
 // Etc...</pre></code>
@@ -70,26 +70,26 @@ $(window).on('enter.small', function () {
     <script src='../break.js'></script>
     <script>
       $(window).on('exit.small', function () {
-        alert('Exiting small breakpoint')
+        console('Exiting small breakpoint')
       })
       $(window).on('enter.small', function () {
-        alert('Entering small breakpoint')
+        console('Entering small breakpoint')
       })
       addBreakpoint('small', '(min-width: 600px)')
 
       $(window).on('exit.medium', function () {
-        alert('Exiting medium breakpoint')
+        console('Exiting medium breakpoint')
       })
       $(window).on('enter.medium', function () {
-        alert('Entering medium breakpoint')
+        console('Entering medium breakpoint')
       })
       addBreakpoint('medium', '(min-width: 900px)')
 
       $(window).on('exit.large', function () {
-        alert('Exiting large breakpoint')
+        console('Exiting large breakpoint')
       })
       $(window).on('enter.large', function () {
-        alert('Entering large breakpoint')
+        console('Entering large breakpoint')
       })
       addBreakpoint('large', '(min-width: 1200px)')
     </script>
