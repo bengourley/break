@@ -54,42 +54,42 @@ addBreakpoint('medium', '(min-width: 900px)')
 addBreakpoint('large', '(min-width: 1200px)')</code></pre>
       <p>Which causes events to be fired on the window object:
       <pre><code>$(window).on('exit.small', function () {
-  console('Exiting small breakpoint')
+  console.log('Exiting small breakpoint')
 })
 
 $(window).on('enter.small', function () {
-  console('Entering small breakpoint')
+  console.log('Entering small breakpoint')
 })
 
 // Etc...</pre></code>
 
-    <p>Look in the console to see the results.</p>
+    <p>Look in the console.log to see the results.</p>
     </div>
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
     <script src='../modernizr.js'></script>
     <script src='../break.js'></script>
     <script>
       $(window).on('exit.small', function () {
-        console('Exiting small breakpoint')
+        console.log('Exiting small breakpoint')
       })
       $(window).on('enter.small', function () {
-        console('Entering small breakpoint')
+        console.log('Entering small breakpoint')
       })
       addBreakpoint('small', '(min-width: 600px)')
 
       $(window).on('exit.medium', function () {
-        console('Exiting medium breakpoint')
+        console.log('Exiting medium breakpoint')
       })
       $(window).on('enter.medium', function () {
-        console('Entering medium breakpoint')
+        console.log('Entering medium breakpoint')
       })
       addBreakpoint('medium', '(min-width: 900px)')
 
       $(window).on('exit.large', function () {
-        console('Exiting large breakpoint')
+        console.log('Exiting large breakpoint')
       })
       $(window).on('enter.large', function () {
-        console('Entering large breakpoint')
+        console.log('Entering large breakpoint')
       })
       addBreakpoint('large', '(min-width: 1200px)')
     </script>
