@@ -1,6 +1,12 @@
 break.js
 =======
 
+***Now available on npm***
+
+```
+npm install break
+```
+
 A little script that runs in tandem with jQuery and Modernizr to fire events
 when certain media queries are entered and exited due to a window resize.
 

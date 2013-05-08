@@ -1,0 +1,25 @@
+{
+  "name": "break",
+  "version": "0.0.0",
+  "description": "Fire events when certain media queries are entered and exited due to a window resize",
+  "main": "break.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bengourley/break.git"
+  },
+  "keywords": [
+    "breakpoint",
+    "events",
+    "media",
+    "queries"
+  ],
+  "author": "Ben Gourley",
+  "license": "BSD",
+  "readmeFilename": "Readme.md"
+}
