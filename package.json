@@ -1,6 +1,6 @@
 {
   "name": "break",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Fire events when certain media queries are entered and exited due to a window resize",
   "main": "break.js",
   "directories": {
