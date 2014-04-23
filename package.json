@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Fire events when certain media queries are entered and exited due to a window resize",
   "main": "break.js",
-  "directories": {
-    "example": "example"
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,5 +21,4 @@
   ],
   "author": "Ben Gourley",
   "license": "BSD",
-  "readmeFilename": "Readme.md"
 }
