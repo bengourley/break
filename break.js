@@ -1,4 +1,14 @@
-module.exports = BreakpointManager
+module.exports = createBreakpointManager
+module.exports.BreakpointManager = BreakpointManager
+
+/*
+ * Main use case: instantiate and start
+ */
+function createBreakpointManager() {
+  var bm = new BreakpointManager()
+  bm.start()
+  return bm
+}
 
 var Breakpoint = require('./breakpoint')
   , Emitter = require('events').Emitter
@@ -10,8 +20,6 @@ function BreakpointManager() {
   Emitter.call(this)
   // Store a list of breakpoints to watch
   this.breakpoints = []
-  // Begin listening to window#resize
-  this.start()
 }
 
 // Backwards compatible inheritance (includes ES3 envs)
@@ -23,7 +31,9 @@ inherits(BreakpointManager, Emitter)
 BreakpointManager.prototype.add = function (name, media) {
   // Only run on browsers that support media queries
   if (!match('only all')) return
-  this.breakPoints.push(new Breakpoint(name, media))
+  var breakpoint = new Breakpoint(name, media)
+  this.breakPoints.push(breakpoint)
+  process.nextTick(this.checkSingle.bind(this, breakpoint))
 }
 
 /*
@@ -57,16 +67,21 @@ BreakpointManager.prototype.stop = function () {
  * Check each breakpoint
  */
 BreakpointManager.prototype.check = function () {
-  this.breakpoints.forEach(function (breakpoint) {
-    switch (breakpoint.check()) {
-    case true:
-      return this.emit('enter:' + breakpoint.name)
-    case false:
-      return this.emit('exit:' + breakpoint.name)
-    case null:
-      return
-    }
-  }.bind(this))
+  this.breakpoints.forEach(this.checkSingle.bind(this))
+}
+
+/*
+ * Check a single breakpoint
+ */
+BreakpointManager.prototype.checkSingle = function (breakpoint) {
+  switch (breakpoint.check()) {
+  case true:
+    return this.emit('enter:' + breakpoint.name)
+  case false:
+    return this.emit('exit:' + breakpoint.name)
+  case null:
+    return
+  }
 }
 
 /*

@@ -7,8 +7,10 @@
     "registry": "http://registry.npmjs.org"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "standalone": "./node_modules/.bin/browserify break.js | ./node_modules/.bin/uglifyjs - > break.min.js"
+    "test": "npm run lint && echo 'TODO: TESTS'",
+    "lint": "./node_modules/.bin/jshint .",
+    "clean": "rm -rf standalone",
+    "standalone": "npm run clean && mkdir standalone && ./node_modules/.bin/browserify break.js -s createBreakpointManager | ./node_modules/.bin/uglifyjs - > ./standalone/break.min.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,8 @@
   "devDependencies": {
     "browserify": "^3.44.2",
     "uglifyjs": "^2.3.6",
-    "uglify-js": "^2.4.13"
+    "uglify-js": "^2.4.13",
+    "jshint": "^2.5.0"
   },
   "dependencies": {
     "inherits": "^2.0.1"

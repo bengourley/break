@@ -1,5 +1,7 @@
 module.exports = match
 
+require('./match-media-polyfill')
+
 var browserMatchMedia = window.matchMedia || window.msMatchMedia
 
 /*
