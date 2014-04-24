@@ -2,7 +2,7 @@
 
 Know when breakpoints are entered/exited due to a window resize.
 
-# Install
+# Installation
 
 If you are sane and use npm:
 
@@ -64,3 +64,45 @@ should run once if media queries are not supported.
 ### bm.fallback(fn)
 
 Runs the function `fn` if media queries are not supported.
+
+
+# Development
+
+This is quite a simple module, however it's annoyingly tricky to test. However,
+this has been acheived by having two browser test suites – `modern` and `legacy`.
+The caveat is that these tests have to run in a browser by hand.
+
+All bug fixes and features require that (if possible) test is added which fails
+before the implementation of the new code, and passes afterwards.
+
+## Check out a development version
+
+```
+git clone git@github.com:bengourley/break.git
+cd break
+npm install
+```
+
+## Run the tests
+
+### For modern browsers
+
+These tests must pass in IE9+, Firefox, Safari and Chrome
+
+```
+npm test
+```
+
+Then use link presented in the terminal to run the tests in various browsers.
+You will be prompted to resize your browser at points during the test.
+
+
+### For legacy browsers
+
+These tests must pass in IE6,7 and 8
+
+```
+npm run test-legacy
+```
+
+As above, use the link to the tests in various browsers.

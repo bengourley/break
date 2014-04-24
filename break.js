@@ -32,7 +32,7 @@ BreakpointManager.prototype.add = function (name, media) {
   // Only run on browsers that support media queries
   if (!match('only all')) return
   var breakpoint = new Breakpoint(name, media)
-  this.breakPoints.push(breakpoint)
+  this.breakpoints.push(breakpoint)
   process.nextTick(this.checkSingle.bind(this, breakpoint))
 }
 
@@ -41,7 +41,7 @@ BreakpointManager.prototype.add = function (name, media) {
  */
 BreakpointManager.prototype.fallback = function (fn) {
   // Only run on browsers that support media queries
-  if (!match('only all')) return
+  if (match('only all')) return
   fn()
 }
 
@@ -51,7 +51,7 @@ BreakpointManager.prototype.fallback = function (fn) {
 BreakpointManager.prototype.start = function () {
   // Only add the listener if matchMedia is supported
   if (!match('only all')) return
-  this._boundCheck(this.check.bind(this))
+  this._boundCheck = this.check.bind(this)
   window.addEventListener('resize', this._boundCheck)
   this.check()
 }
