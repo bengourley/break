@@ -83,26 +83,19 @@ cd break
 npm install
 ```
 
-## Run the tests
-
-### For modern browsers
-
-These tests must pass in IE9+, Firefox, Safari and Chrome
+## Running the tests
 
 ```
 npm test
 ```
 
-Then use link presented in the terminal to run the tests in various browsers.
+Then use the links presented in the terminal to run the tests in various browsers.
 You will be prompted to resize your browser at points during the test.
 
+The modern tests should pass in IE9+, Firefox, Safari and Chrome.
+The legacy tests should pass in IE6,7,8.
 
-### For legacy browsers
-
-These tests must pass in IE6,7 and 8
-
-```
-npm run test-legacy
-```
-
-As above, use the link to the tests in various browsers.
+Note: you may need to replace a portion of the links if using a VM. I am using
+VirtualBox, so the route to my development `localhost` is `10.0.2.2`. Therefore
+the url I use to run the legacy tests on IE6 inside my VM is:
+`http://10.0.2.2:4567/test/legacy/index.html`.
