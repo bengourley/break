@@ -10,7 +10,7 @@
     "test": "npm run lint && npm run build-tests && npm run test-urls && npm run test-server",
     "build-tests": "./node_modules/.bin/browserify test/legacy/tests.js -o test/legacy/bundle.js && ./node_modules/.bin/browserify test/modern/tests.js -o test/modern/bundle.js",
     "test-server": "./node_modules/.bin/st -p 4567",
-    "test-urls": "echo '\n\n-- Run the tests with these links: --\n\nhttp://localhost:4567/test/modern/index.html\nhttp://localhost:4567/test/modern/index.html\n\n' > /dev/null",
+    "test-urls": "echo '\n\n-- Run the tests with these links: --\n\nhttp://localhost:4567/test/modern/index.html\nhttp://localhost:4567/test/legacy/index.html\n\n' > /dev/null",
     "lint": "./node_modules/.bin/jshint .",
     "clean": "rm -rf standalone",
     "standalone": "npm run clean && mkdir standalone && ./node_modules/.bin/browserify break.js -s createBreakpointManager | ./node_modules/.bin/uglifyjs - > ./standalone/break.min.js"
