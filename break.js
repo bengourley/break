@@ -11,7 +11,7 @@ function createBreakpointManager() {
 }
 
 var Breakpoint = require('./breakpoint')
-  , Emitter = require('events').Emitter
+  , Emitter = require('events').EventEmitter
   , inherits = require('inherits')
   , match = require('./match-media')
 
