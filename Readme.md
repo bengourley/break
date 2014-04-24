@@ -107,3 +107,11 @@ npm run standalone
 ```
 
 This needs to happen before every release.
+
+# License
+
+BSD. Bundled in with this module is an IE9 matchMedia polyfill by Scott Jehl et al. with a BSD/MIT license.
+
+# Authors / Contributors
+
+Ben Gourley, Nick Price.
