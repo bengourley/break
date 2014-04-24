@@ -7,7 +7,8 @@
     "registry": "http://registry.npmjs.org"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "standalone": "./node_modules/.bin/browserify break.js | ./node_modules/.bin/uglifyjs - > break.min.js"
   },
   "repository": {
     "type": "git",
@@ -21,4 +22,12 @@
   ],
   "author": "Ben Gourley",
   "license": "BSD",
+  "devDependencies": {
+    "browserify": "^3.44.2",
+    "uglifyjs": "^2.3.6",
+    "uglify-js": "^2.4.13"
+  },
+  "dependencies": {
+    "inherits": "^2.0.1"
+  }
 }

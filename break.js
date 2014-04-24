@@ -1,75 +1,80 @@
-(function () {
+module.exports = BreakpointManager
 
-  // Cache the window object and create
-  // an empty list of breakpoints
-  var o = $(window)
-    , breakPoints = []
-    , matchMedia = window.Modernizr.mq
+var Breakpoint = require('./breakpoint')
+  , Emitter = require('events').Emitter
+  , inherits = require('inherits')
+  , match = require('./match-media')
 
-  /*
-   * Construct a BreakPoint, given a name
-   * and a media query.
-   */
-  function BreakPoint(name, media) {
-    this.name = name
-    this.media = media
-    this.matches = null
-  }
+function BreakpointManager() {
+  // Call Emitter constructor
+  Emitter.call(this)
+  // Store a list of breakpoints to watch
+  this.breakpoints = []
+  // Begin listening to window#resize
+  this.start()
+}
 
-  /*
-   * Check if the breakpoint's media query
-   * matches the window's current state.
-   * Trigger events on the window accordingly.
-   */
-  BreakPoint.prototype.check = function () {
+// Backwards compatible inheritance (includes ES3 envs)
+inherits(BreakpointManager, Emitter)
 
-    if (this.matches === null) {
-      if (matchMedia(this.media)) {
-        o.trigger('enter.' + this.name)
-        this.matches = true
-      } else {
-        o.trigger('exit.' + this.name)
-        this.matches = false
-      }
-      return this
+/*
+ * Add a breakpoint
+ */
+BreakpointManager.prototype.add = function (name, media) {
+  // Only run on browsers that support media queries
+  if (!match('only all')) return
+  this.breakPoints.push(new Breakpoint(name, media))
+}
+
+/*
+ * Run a function if media queries are not supported
+ */
+BreakpointManager.prototype.fallback = function (fn) {
+  // Only run on browsers that support media queries
+  if (!match('only all')) return
+  fn()
+}
+
+/*
+ * Start listening to window#resize and firing events
+ */
+BreakpointManager.prototype.start = function () {
+  // Only add the listener if matchMedia is supported
+  if (!match('only all')) return
+  this._boundCheck(this.check.bind(this))
+  window.addEventListener('resize', this._boundCheck)
+  this.check()
+}
+
+/*
+ * Stop listening to window#resize
+ */
+BreakpointManager.prototype.stop = function () {
+  if (this._boundCheck) window.removeEventListener('resize', this._boundCheck)
+}
+
+/*
+ * Check each breakpoint
+ */
+BreakpointManager.prototype.check = function () {
+  this.breakpoints.forEach(function (breakpoint) {
+    switch (breakpoint.check()) {
+    case true:
+      return this.emit('enter:' + breakpoint.name)
+    case false:
+      return this.emit('exit:' + breakpoint.name)
+    case null:
+      return
     }
+  }.bind(this))
+}
 
-    if (matchMedia(this.media) && !this.matches) {
-      o.trigger('enter.' + this.name)
-      this.matches = true
-      return this
-    }
-
-    if (!matchMedia(this.media) && this.matches) {
-      o.trigger('exit.' + this.name)
-      this.matches = false
-      return this
-    }
-
-    return this
-
-  }
-
-  /*
-   * Add a breakpoint
-   */
-  function add(name, media) {
-    // Only run on browsers that support media queries
-    if (!window.Modernizr.mq('(min-width:0px)')) return
-    breakPoints.push(new BreakPoint(name, media).check())
-  }
-
-  // Check if the breakpoints
-  // match on window#resize
-  if (window.Modernizr.mq('(min-width:0px)')) {
-    o.on('resize', function () {
-      $.each(breakPoints, function () {
-        this.check()
-      })
-    })
-  }
-
-  // Make public
-  window.addBreakpoint = add
-
-}())
+/*
+ * Override the event emitter's on() function to take a 3rd argument
+ * - a flag as to whether the provided fn should be run if media queries
+ * are not available.
+ */
+BreakpointManager.prototype.on = function (event, fn, isFallback) {
+  Emitter.prototype.on.call(this, event, fn)
+  if (isFallback) this.fallback(fn)
+}
