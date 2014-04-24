@@ -23,7 +23,8 @@
     "breakpoint",
     "events",
     "media",
-    "queries"
+    "queries",
+    "browser"
   ],
   "author": "Ben Gourley",
   "license": "BSD",

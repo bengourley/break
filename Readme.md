@@ -99,3 +99,11 @@ Note: you may need to replace a portion of the links if using a VM. I am using
 VirtualBox, so the route to my development `localhost` is `10.0.2.2`. Therefore
 the url I use to run the legacy tests on IE6 inside my VM is:
 `http://10.0.2.2:4567/test/legacy/index.html`.
+
+## Building the standalone version
+
+```
+npm run standalone
+```
+
+This needs to happen before every release.
