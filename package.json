@@ -33,10 +33,10 @@
     "uglifyjs": "^2.3.6",
     "uglify-js": "^2.4.13",
     "jshint": "^2.5.0",
-    "st": "^0.4.1"
+    "st": "^0.4.1",
+    "mocha": "^1.18.2"
   },
   "dependencies": {
-    "inherits": "^2.0.1",
-    "mocha": "^1.18.2"
+    "inherits": "^2.0.1"
   }
 }
